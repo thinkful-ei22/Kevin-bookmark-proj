@@ -12,27 +12,49 @@
         <h1>Bookmarks App</h1>
         <div class ="form-box">  
         <form id="bookmark-list-form js-bookmark-list-form">
-            <p>Add a...</p>
             <div class ="bkTitle">
-                <label for="bkmk-list-title">Title</label>
+                <label for="bkmk-list-title">Title:</label>
                 <input type="text" name="title" class="js-bkmk-list-title" 
-                id = "bk-title" placeholder="Title">
+                id = "bk-title" placeholder="Title" required>
             </div> 
             <div class ="bkUrl">
-                <label for="bkmk-list-url">Url </label>
+                <label for="bkmk-list-url">Url: </label>
                 <input type="text" name="url" class="js-bkmk-list-url" 
-                id = "bk-url" placeholder="https://www.example.com/">
+                id = "bk-url" placeholder="https://www.example.com/" required>
             </div>
             <div class ="bkDesc">
-                <label for="bkmk-list-desc">Description</label>
+                <label for="bkmk-list-desc">Description:</label>
                 <textarea type="text" name="desc" class="js-bkmk-list-desc"
-                id = "bk-desc"></textarea>
+                id = "bk-desc" placeholder="Optional"></textarea>
             </div> 
-            <div class ="bkRating">  
+            <!-- <div class ="bkRating">  
                 <label for="bkmk-list-rating">Rating (1-5)</label>
                 <input type="text" name="rating" class="js-bkmk-list-rating"
-                id = "bk-rating">
+                id = "bk-rating"> -->
+            <div class = "bkRating">
+                <div class = "wrap-radio">
+                    <input type="radio" id="bk-rating" class ="bk5"
+                        name="rating" value="5">
+                    <label for="rating-five">5 stars</label>
+                
+                    <input type="radio" id="bk-rating" class ="bk4"
+                        name="rating" value="4">
+                    <label for="rating-four">4 stars</label>
+                
+                    <input type="radio" id="bk-rating" class ="bk3"
+                        name="rating" value="3">
+                    <label for="rating-three">3 stars</label>
+                    
+                    <input type="radio" id="bk-rating" class ="bk2"
+                        name="rating" value="2">
+                    <label for="rating-two">2 stars</label>
+            
+                    <input type="radio" id="bk-rating" class ="bk1"
+                        name="rating" value="1">
+                    <label for="rating-one">1 star</label>
+                </div>
             </div>
+            <!-- </div> -->
             <button type="submit">Add bookmark</button>
         </form>
         </div>

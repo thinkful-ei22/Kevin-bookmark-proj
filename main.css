@@ -3,13 +3,23 @@
   }
   
   body {
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    text-align: center;
   }
   
  bkTitle, bkUrl, bkDesc, bkRating {
       display: inline-block;
       padding: 5px;
 
+  }
+  .bkRating {
+      /* float: right; */
+      /*left: -100px;
+      bottom: -100px; */
+      /* padding: 10px; */
+      width: 400px;
+      text-align: center;
+      border: 1px solid black;
   }
 
   button, input[type="text"] {
@@ -30,7 +40,6 @@
   
   .container {
     max-width: 600px;
-    margin: 0 auto;
   }
   
   .bookmark-list {
@@ -38,8 +47,12 @@
     padding-left: 0;
   }
   
-  .bookmark-list > li {
+  li {
+    width: 420px;
+    /* margin-right: auto;
+    margin-left: auto; */
     margin-bottom: 20px;
+    margin-top: 15px;
     border: 1px solid black;
     padding: 20px;
     list-style: none;
@@ -54,12 +67,15 @@
 
   ul{
       list-style: none;
+      margin: 0;
+      padding: 0;
   }
 
   .form-box {
       padding-top: 10px;
       padding-left: 20px;
       border: 1px solid black;
+      text-align: center;
   }
 
   span {
