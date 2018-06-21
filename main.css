@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+ bkTitle, bkUrl, bkDesc {
+      display: inline-block;
+
+  }
+
+  button, input[type="text"] {
+    padding: 5px;
+  }
+  
+  button:hover {
+    cursor: pointer;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* #bookmark-list-item {
+    width: 250px;
+  } */
+  
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .bookmark-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .bookmark-list > li {
+    margin-bottom: 20px;
+    border: 1px solid black;
+    padding: 20px;
+    list-style: none;
+  }
+  
+  .bookmark-item {
+    display: block;
+    color: grey;
+    /* font-style: italic;  */
+    margin-bottom: 15px;
+  }
+
+  ul{
+      list-style: none;
+  }
+
+  .form-box {
+      padding-top: 10px;
+      padding-left: 20px;
+      border: 1px solid black;
+  }
+
+  span {
+      float: right;
+  }

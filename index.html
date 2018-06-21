@@ -1,0 +1,94 @@
+<<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bookmarks App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <div class = "container">
+        <h1>Bookmarks App</h1>
+        <div class ="form-box">  
+        <form id="bookmark-list-form js-bookmark-list-form">
+            <p>Add a...</p>
+            <div class ="bkTitle">
+                <label for="bkmk-list-title">Title</label>
+                <input type="text" name="bkmk-list-title" class="js-bkmk-list-title" placeholder="Title">
+            </div> 
+            <div class ="bkUrl">
+                <label for="bkmk-list-url">Url </label>
+                <input type="text" name="bkmk-list-url" class="js-bkmk-list-url" placeholder="https://www.example.com/">
+            </div>
+            <div class ="bkDesc">
+                <label for="bkmk-list-desc">Description</label>
+                <textarea type="text" name="bkmk-list-desc" class="js-bkmk-list-desc"></textarea>
+            </div> 
+            <div class ="bkRating">  
+                <label for="bkmk-list-rating">Rating (1-5)</label>
+                <input type="text" name="bkmk-list-rating" class="js-bkmk-list-rating">
+                <button type="submit">Add bookmark</button>
+            </div>
+        </form>
+        </div>
+    <ul class = "bookmark-list">
+            <li class="js-item-element bookmark-item" data-item-id="">
+                Bookmark1 <span class = "rating-star"> 5 stars</span>
+                <div class="bookmark-details">
+                    <div class="url">
+                    <a href = "https://google.com">https://google.com</a>
+                    </div>
+                    <div class="description">
+                    <p>Description</p>
+                    </div>
+                    <button class="bookmark-item-expand js-bookmark-item-expand">
+                    <span class="button-label">Expand</span>
+                    </button>
+                    <button class="bookmark-item-delete js-bookmark-item-delete">
+                        <span class="button-label">Remove</span>
+                    </button>
+                </div>
+            </li>
+            <li class="js-item-element bookmark-item" data-item-id="">
+                Bookmark2 <span class = "rating-star"> 5 stars</span>
+                <div class="bookmark-details">
+                    <div class="url">
+                    <a href = "https://google.com">https://google.com</a>
+                    </div>
+                    <div class="description">
+                    <p>Description</p>
+                    </div>
+                    <button class="bookmark-item-expand js-bookmark-item-expand">
+                    <span class="button-label">Expand</span>
+                    </button>
+                    <button class="bookmark-item-delete js-bookmark-item-delete">
+                        <span class="button-label">Remove</span>
+                    </button>
+                </div>
+            </li>
+            <li class="js-item-element bookmark-item" data-item-id="">
+                Bookmark3 <span class = "rating-star"> 5 stars</span>
+                <div class="bookmark-details">
+                    <div class="url">
+                    <a href = "https://google.com">https://google.com</a>
+                    </div>
+                    <div class="description">
+                    <p>Description</p>
+                    </div>
+                    <button class="bookmark-item-expand js-bookmark-item-expand">
+                    <span class="button-label">Expand</span>
+                    </button>
+                    <button class="bookmark-item-delete js-bookmark-item-delete">
+                        <span class="button-label">Remove</span>
+                    </button>
+                </div>
+            </li>
+    </ul>
+</div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="api.js"></script>
+    <script src="bookmark.js"></script>
+</body>
+</html>
