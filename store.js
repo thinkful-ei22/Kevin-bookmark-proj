@@ -8,17 +8,6 @@ const store = (function(){
     this.bookmark.push(bookmark);
   };
 
-//   const findById = function(id) {
-//     console.log(id);
-//     const array = this.bookmark.find(item => item.id === id);
-//     console.log(array);
-//   };
-
-  // const findAndToggleChecked = function(id) {
-  //   const item = this.findById(id);
-  //   item.checked = !item.checked;
-  // };
-
   const findAndDelete = function(id) {
     this.bookmark = this.bookmark.filter(item => item.id !== id);
   };
@@ -44,7 +33,6 @@ const store = (function(){
     filter: 1,
 
     addBookmarkToStore,
-    // findById,
     findAndDelete,
     filterBookmarks,
   };

@@ -10,7 +10,8 @@
  bkTitle, bkUrl, bkDesc, bkRating {
       display: inline-block;
       padding: 5px;
-
+      margin-left: auto;
+      margin-right: auto;
   }
   .bkRating {
       /* float: right; */
@@ -19,11 +20,12 @@
       /* padding: 10px; */
       width: 400px;
       text-align: center;
-      border: 1px solid black;
+      margin-left: auto;
+      margin-right: auto;
   }
 
   button, input[type="text"] {
-    padding: 5px;
+    padding: 10px;
   }
   
   button:hover {
@@ -39,7 +41,11 @@
   } */
   
   .container {
-    max-width: 600px;
+    width: 80%;
+    max-width: 1000px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
   }
   
   .bookmark-list {
@@ -48,7 +54,7 @@
   }
   
   li {
-    width: 420px;
+    max-width: 420px;
     /* margin-right: auto;
     margin-left: auto; */
     margin-bottom: 20px;
@@ -58,28 +64,82 @@
     list-style: none;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 10%;
   }
   
   .bookmark-item {
     display: block;
-    color: grey;
     /* font-style: italic;  */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   ul{
       list-style: none;
-      margin: 0;
       padding: 0;
+      width: 600px;
+      margin-left: auto;
+      margin-right: auto;
   }
 
   .form-box {
+      width: 600px;
       padding-top: 10px;
       padding-left: 20px;
       border: 1px solid black;
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
   }
 
-  span {
+  .rating-star {
       float: right;
   }
+
+  .title{
+      float: left;
+  }
+
+  label {
+      font-size: 18px;
+  }
+
+  .url, .rating-star, .description, .title{
+      font-size: 20px;
+  } 
+
+  p {
+      width: 350px;
+      overflow: auto;
+  }
+
+  button {
+      border-radius: 10%;
+      background-color: #1E90FF;
+  }
+
+  .wrap-radio{
+      display: flex;
+  }
+
+  .bk1, .bk2, .bk3, .bk4, .bk5 {
+      display: flex;
+  }
+
+@media only screen and (max-width: 640px){
+      ul{
+          width: 100%;
+      }
+      .form-box{
+          width: 100%;
+      }
+      .container{
+        width: 100%;
+      }
+      .wrap-radio{
+          flex-direction: column;
+          align-items: center;
+      }
+}
+@media only screen and (min-width: 980px){
+
+}

@@ -7,10 +7,6 @@ const api = (function () {
   
   const getBookmark = function(callback){
     $.getJSON(`${BASE_URL}`, callback);
-    // const item = store.items[0];
-    // console.log('current name: ' + item.name);
-    // store.findAndUpdate(item.id, { name: 'foobar' });
-    // console.log('new name: ' + item.name);
   };
 
   const createBookmark = function (data, callback) {    
@@ -46,14 +42,3 @@ const api = (function () {
     deleteBookmark,
   };
 }());
-
-
-
-// const getItems = (function(item){
-//   try {
-//     Item.validateName(name);
-//     this.items.push(item);
-//   } catch(e) {
-//     console.log(e.message);
-//   }
-// }());

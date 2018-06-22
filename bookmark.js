@@ -14,9 +14,10 @@ $.fn.extend(
 
 const bookmarkList = (function(){
 
-  const generateBkMarkItemHtml = function(bookmark) { //Create a `generateVideoItemHtml` function that receives the decorated object
+  const generateBkMarkItemHtml = function(bookmark) { 
     return `<li class="js-item-element bookmark-item" data-item-id="${bookmark.id}">
-    ${bookmark.title} <span class = "rating-star">${bookmark.rating}</span>
+    <span class = "title">${bookmark.title}</span>
+    <span class = "rating-star">${bookmark.rating}</span>
     <div class="bookmark-details">
     ${bookmark.expanded ?`
         <div class="url">
@@ -32,7 +33,7 @@ const bookmarkList = (function(){
         <span class="button-label">Remove</span>
     </button>
     </div>
-    </li>`; //Using the object, return an HTML string containing all the expected data
+    </li>`; 
   };
   const declareNonValidInputs = function(bookmark) {
     bookmark = JSON.parse(bookmark);
@@ -44,7 +45,6 @@ const bookmarkList = (function(){
     console.log(input);
     try{
       declareNonValidInputs(input);
-    //   render();
     }
     catch(error){
       alert(error.message);
@@ -54,24 +54,6 @@ const bookmarkList = (function(){
   function getBookmarkIdFromElement(item) {
     return $(item).closest('.js-item-element').attr('data-item-id');
   }
-
-  const expandBookMark = function() {
-    $('.js-item-element').on('click', '.js-bookmark-expand', function(){
-      const id = getBookmarkIdFromElement(event.currentTarget);
-      id.expanded = true;
-      console.log(id.expanded);
-    });
-  };
-
-  const handleExpandBookmark = function() {
-    $('.js-bookmark-list').on('click', '.js-bookmark-expand', event => {
-      const currentId = getBookmarkIdFromElement(event.currentTarget);
-      store.bookmark.map(bookmark =>{
-        if(bookmark.id === currentId) bookmark.expanded = !bookmark.expanded;
-      });
-      render();
-    });
-  };
 
   const generateHtmlString = function (list){
     console.log(list);
@@ -88,6 +70,29 @@ const bookmarkList = (function(){
       console.log('new filtered array', filtered);
       console.log('this is the store', store.bookmark);
       render(filtered);
+    });
+  };
+
+  const expandBookMark = function() {
+    $('.js-item-element').on('click', '.js-bookmark-expand', function(){
+      const id = getBookmarkIdFromElement(event.currentTarget);
+      id.expanded = true;
+      console.log(id.expanded);
+    });
+  };
+
+  const handleExpandBookmark = function(filtered = null) {
+    $('.js-bookmark-list').on('click', '.js-bookmark-expand', event => {
+      const currentId = getBookmarkIdFromElement(event.currentTarget);
+      store.bookmark.map(bookmark =>{
+        if(bookmark.id === currentId) bookmark.expanded = !bookmark.expanded;
+      });
+      if(filtered !== null){
+        store.bookmark = filtered;
+        render(filtered);
+      }else {
+        render();
+      }
     });
   };
   
@@ -110,9 +115,7 @@ const bookmarkList = (function(){
   };
 
   const handleDeleteItemClicked = function() {
-  // like in `handleItemCheckClicked`, we use event delegation
     $('.js-bookmark-list').on('click', '.js-bookmark-item-delete', event => {
-    // get the index of the item in store.items
       console.log('delete button clicked');
       const id = getBookmarkIdFromElement(event.currentTarget);
       console.log(id);
@@ -128,7 +131,7 @@ const bookmarkList = (function(){
 
   const handleFormSubmit = function() { //Create a `handleFormSubmit` function that adds an event listener to the form
     $('.form-box').on('submit', '#js-bookmark-list-form', function(event){
-      event.preventDefault();//Prevent default event
+      event.preventDefault();
       console.log('add bookmark submitted');
       const dataObj= $.fn.serializeJson(event.target);
       handleValidInput(dataObj);
@@ -149,14 +152,10 @@ const bookmarkList = (function(){
         store.addBookmarkToStore(response);
         render();
       }));
-    //addBookmarkToStore(dataObj);//Inside the callback, add the decorated response 
-    //into your store using the `addBookmarkToStore` function
-    //inside the callback, run the `render` function 
     });
   };
 
   // When DOM is ready:
-
   function bindEventListeners() { 
     handleFormSubmit();
     handleDeleteItemClicked();
