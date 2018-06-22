@@ -24,7 +24,6 @@ const store = (function(){
 
 
   const filterBookmarks = function(starVal) {
-    console.log(starVal);
     return store.bookmark.filter(bkmk => bkmk.rating >= starVal);
   };
 

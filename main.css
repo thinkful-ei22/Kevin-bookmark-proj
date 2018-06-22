@@ -121,7 +121,7 @@
       display: flex;
   }
 
-  .bk1, .bk2, .bk3, .bk4, .bk5 {
+  .bk1, .radio, .bk2, .radio .bk3, .bk4, .bk5 {
       display: flex;
   }
 

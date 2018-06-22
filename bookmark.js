@@ -42,7 +42,6 @@ const bookmarkList = (function(){
     //handlesubmit still attempts to send incorrect info, which is a minor detail.
   };
   const handleValidInput = function (input){
-    console.log(input);
     try{
       declareNonValidInputs(input);
     }
@@ -63,12 +62,9 @@ const bookmarkList = (function(){
 
   const filterMinStars = function(){
     $('#js-star-filter').on('submit', function(){
-      console.log('filter button clicked');
       event.preventDefault();
       const starVal = $('.star-filter').val();
       const filtered = store.bookmark.filter(bkmk => bkmk.rating >= starVal);
-      console.log('new filtered array', filtered);
-      console.log('this is the store', store.bookmark);
       render(filtered);
     });
   };
@@ -77,7 +73,6 @@ const bookmarkList = (function(){
     $('.js-item-element').on('click', '.js-bookmark-expand', function(){
       const id = getBookmarkIdFromElement(event.currentTarget);
       id.expanded = true;
-      console.log(id.expanded);
     });
   };
 
@@ -108,8 +103,6 @@ const bookmarkList = (function(){
   const render = function(filtered = null) { 
     let tempStore = store.bookmark;
     if (filtered !== null) tempStore = filtered;
-    console.log('DOM STORE', store.bookmark);
-    console.log('tempStore', tempStore);
     const bookElements = generateHtmlString(tempStore);
     $('.bookmark-list').html(bookElements);
   };
@@ -118,14 +111,10 @@ const bookmarkList = (function(){
     $('.js-bookmark-list').on('click', '.js-bookmark-item-delete', event => {
       console.log('delete button clicked');
       const id = getBookmarkIdFromElement(event.currentTarget);
-      console.log(id);
       // delete the item
-      api.deleteBookmark(id, (response) =>{
-        console.log(response);
-        console.log('i deleted');
-        store.findAndDelete(id);
-        render();
-      });
+      api.deleteBookmark(id);
+      store.findAndDelete(id);
+      render();
     });
   };
 
