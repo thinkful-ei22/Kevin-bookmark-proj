@@ -74,7 +74,7 @@ const BASE_URL = 'https://thinkful-list-api.herokuapp.com/KevinT/bookmarks';
 
 const generateBkMarkItemHtml = function(bookmark) { //Create a `generateVideoItemHtml` function that receives the decorated object
   return `
-<li class="js-item-element bookmark-item" data-item-id="">
+<li class="js-item-element bookmark-item" data-item-id="${bookmark.id}">
     ${bookmark.title} <span class = "rating-star">${bookmark.rating}</span>
     <div class="bookmark-details">
         <div class="url">
@@ -115,6 +115,31 @@ const render = function() { //Create a `render` function
 //   $('.results').html(bookElements);//Add your array of DOM elements to the appropriate DOM element
 };
 
+function getBookmarkIdFromElement(item) {
+  return $(item).closest('.js-item-element').attr('data-item-id');
+}
+
+const findAndDelete = function(id) {
+  store.bookmark = store.bookmark.filter(item => item.id !== id);
+};
+
+function handleDeleteItemClicked() {
+  // like in `handleItemCheckClicked`, we use event delegation
+  $('.js-bookmark-list').on('click', '.js-bookmark-item-delete', event => {
+    // get the index of the item in store.items
+    console.log('delete button clicked');
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    console.log(id);
+    // delete the item
+    api.deleteBookmark(id, (response) =>{
+      console.log(response);
+      console.log('i deleted');
+      findAndDelete(id);
+      render();
+    });
+  });
+}
+
 const handleFormSubmit = function() { //Create a `handleFormSubmit` function that adds an event listener to the form
   $('form').on('submit', function(event){
     event.preventDefault();//Prevent default event
@@ -136,12 +161,15 @@ const handleFormSubmit = function() { //Create a `handleFormSubmit` function tha
       console.log('i uploaded');
       render();
     }));
-    //addBookmarkToStore(dataObj);//Inside the callback, add the decorated response into your store using the `addVideosToStore` function
+    //addBookmarkToStore(dataObj);//Inside the callback, add the decorated response 
+    //into your store using the `addBookmarkToStore` function
     //inside the callback, run the `render` function 
   });
 };
 
 // When DOM is ready:
 $(function () {
-  handleFormSubmit();//Run `handleFormSubmit` to bind the event listener to the DOM
+  handleFormSubmit();
+  handleDeleteItemClicked();
+  render();
 });
