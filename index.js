@@ -1,14 +1,14 @@
 'use strict';
-/*global api, store*/
+/*global api, store, bookmarkList*/
 /*eslint-env jquery*/
 
 $(document).ready(function() {
-  bindEventListeners();
-  render();
+  bookmarkList.bindEventListeners();
+  bookmarkList.render();
   
   api.getBookmark((items) => {
     items.forEach((item) => store.addBookmarkToStore(item));
-    render();
+    bookmarkList.render();
   });
   
 });
