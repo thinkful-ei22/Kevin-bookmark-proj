@@ -18,7 +18,7 @@ const api = (function () {
       url: BASE_URL,
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify(data),
+      data,
       success: callback,
       error: function(err){
         console.log('something went wrong with create', err);
@@ -38,7 +38,6 @@ const api = (function () {
       }
     });
   };
-
 
 
   return {

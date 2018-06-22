@@ -5,38 +5,7 @@
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
   have been transformed into just the necessary data to display on our page, compared to the large
   dataset Youtube will deliver to us.  Example object:
-  
-  {
-    id: '98ds8fbsdy67',
-    title: 'Cats dancing the Macarena',
-    thumbnail: 'https://img.youtube.com/some/thumbnail.jpg'
-  }
-
 */
-// const tempBookMarks1 = {
-//     id: cuid(),
-//     title: 'Roboto',
-//     url: 'https://google.com',
-//     rating: 5,
-// };
-
-// const tempBookMarks2 = {
-//     id: cuid(),
-//     title: 'Robo',
-//     url: 'https://google.com',
-//     rating: 1,
-// };
-
-// const tempBookMarks3 = {
-//     id: cuid(),
-//     title: 'Rob',
-//     url: 'https://google.com',
-//     rating: 4,
-// };
-
-// console.log(tempBookMarks1);
-// console.log(tempBookMarks2);
-// console.log(tempBookMarks3);
 $.fn.extend(
   {
     serializeJson: function(data) {
@@ -53,24 +22,12 @@ const store = {
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/KevinT/bookmarks';
 
-// const fetchBookmarks = function(searchTerm, callback) {//Create a `fetchVideos` function that receives a `searchTerm` and `callback`
-//   const query = {
-//     q: searchTerm,//Use `searchTerm` to construct the right query object based on the Youtube API docs
-//     part: 'snippet',
-//     type: 'video',
-//   };
-//   $.getJSON(BASE_URL, query, callback);//Make a getJSON call using the query object and sending the provided callback in as the last argument
-// };
-
-// const fetchMoreVideos = function(searchTerm, callback) {//Create a `fetchVideos` function that receives a `searchTerm` and `callback`
-//   const query = {
-//     q: searchTerm,//Use `searchTerm` to construct the right query object based on the Youtube API docs
-//     part: 'snippet',
-//     type: 'video',
-//     pageToken,
-//   };
-//   $.getJSON(BASE_URL, query, callback);//Make a getJSON call using the query object and sending the provided callback in as the last argument
-// }
+const toggleForm = function (){
+  $('.container').on('click','.js-show-bookmark-form', function(){
+    console.log('show bookmark form button clicked');
+    $('.form-box').fadeToggle(1000, 'linear');
+  });
+};
 
 const generateBkMarkItemHtml = function(bookmark) { //Create a `generateVideoItemHtml` function that receives the decorated object
   return `
@@ -83,7 +40,7 @@ const generateBkMarkItemHtml = function(bookmark) { //Create a `generateVideoIte
         <div class="description">
         <p>${bookmark.desc}</p>
         </div>
-        <button class="bookmark-item-expand js-bookmark-item-expand">
+        <button class="bookmark-item-expand js-bookmark-expand">
         <span class="button-label">Expand</span>
         </button>
         <button class="bookmark-item-delete js-bookmark-item-delete">
@@ -99,6 +56,29 @@ const addBookmarkToStore = function(bookmark) {//Create a `addVideosToStore` fun
 // objects
   store.bookmark.push(bookmark);//sets the array as the value held in store.videos
 };
+
+// const preRender = function (){
+// api.getBookmark(function(response){
+//     console.log('render ran');
+//     console.log('response', response);
+//     const tempStore = response.map((bookmark)=> {
+//       const dataObj = {
+//         id: bookmark.id,
+//         title: bookmark.title,
+//         url: bookmark.url,
+//         desc: bookmark.desc,
+//         rating: bookmark.rating,
+//         expand: false
+//       };
+//       return dataObj;
+//     });
+//     console.log('tempStore', tempStore);
+//     store.bookmark = tempStore;
+//     const bookElements = store.bookmark.map(bkmk => {//Map through `store.videos`, sending each `video` through your `generateVideoItemHtml
+//       return generateBkMarkItemHtml(bkmk);
+//     });
+//     $('.bookmark-list').html(bookElements);
+// };
 
 const render = function() { //Create a `render` function
   api.getBookmark(function(response){
@@ -123,7 +103,7 @@ const findAndDelete = function(id) {
   store.bookmark = store.bookmark.filter(item => item.id !== id);
 };
 
-function handleDeleteItemClicked() {
+const handleDeleteItemClicked = function() {
   // like in `handleItemCheckClicked`, we use event delegation
   $('.js-bookmark-list').on('click', '.js-bookmark-item-delete', event => {
     // get the index of the item in store.items
@@ -138,19 +118,38 @@ function handleDeleteItemClicked() {
       render();
     });
   });
-}
+};
+
+const handleExpandBookmark = function() {
+  $('.js-bookmark-list').on('click', '.js-bookmark-expand', event => {
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    const foundBookmark = store.findById(id);
+    Object.assign(foundBookmark, {checked: !foundBookmark.checked});
+    // delete foundItem.id;
+    // api.updateItem(id, {checked: !foundBookmark.checked}, function(){
+    //   store.findAndUpdate(id, foundBookmark);
+    render();
+  });
+};
+
+// const addExpandId = function(id){
+//   const objId = store.bookmark.getBookmarkIdFromElement(id);
+//   store[objId]["expand"] = false; 
+//   console.log(store);
+// };
+
 
 const handleFormSubmit = function() { //Create a `handleFormSubmit` function that adds an event listener to the form
   $('form').on('submit', function(event){
     event.preventDefault();//Prevent default event
-    // console.log(event.target);
-    // const dataObj= $.fn.serializeJson(event.target);
-    const dataObj = {
-      title: event.target.title.value,
-      url: event.target.url.value,
-      desc: event.target.desc.value,
-      rating: event.target.rating.value
-    };
+    console.log(event.target);
+    const dataObj= $.fn.serializeJson(event.target);
+    // const dataObj = {
+    //   title: event.target.title.value,
+    //   url: event.target.url.value,
+    //   desc: event.target.desc.value,
+    //   rating: event.target.rating.value,
+    // };
     console.log(dataObj); 
     $('#bk-title').val('');
     $('#bk-url').val('');
@@ -172,4 +171,5 @@ $(function () {
   handleFormSubmit();
   handleDeleteItemClicked();
   render();
+  toggleForm();
 });
